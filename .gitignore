@@ -36,6 +36,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local registration data (contains PII)
+/data/*.json
+
+# local Claude Code tool settings
+/.claude/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

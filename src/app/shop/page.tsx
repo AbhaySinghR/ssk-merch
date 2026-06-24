@@ -1,10 +1,45 @@
 import type { Metadata } from "next";
-import ComingSoonPage from "@/components/ComingSoonPage";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ShopBrowser from "@/components/shop/ShopBrowser";
+import {
+  getAllProducts,
+  getAllSizes,
+  getCategories,
+  getPriceBounds,
+} from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Shop | Sainik School Kapurthala Merch",
+  description: "Official alumni merchandise for Sainik School Kapurthala.",
 };
 
 export default function ShopPage() {
-  return <ComingSoonPage title="Shop" />;
+  const products = getAllProducts();
+  const categories = getCategories();
+  const sizes = getAllSizes();
+  const priceBounds = getPriceBounds();
+
+  return (
+    <div className="flex flex-1 flex-col">
+      <Navbar />
+      <main className="flex-1 bg-maroon">
+        <div className="mx-auto max-w-7xl px-6 pt-16 lg:px-10">
+          <p className="text-xs font-medium tracking-[0.3em] text-gold">
+            OFFICIAL ALUMNI MERCHANDISE
+          </p>
+          <h1 className="mt-6 font-display text-5xl leading-tight text-cream sm:text-6xl">
+            Shop
+          </h1>
+        </div>
+        <ShopBrowser
+          products={products}
+          categories={categories}
+          sizes={sizes}
+          priceBounds={priceBounds}
+        />
+      </main>
+      <Footer />
+    </div>
+  );
 }

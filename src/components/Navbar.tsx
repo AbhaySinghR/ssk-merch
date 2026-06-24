@@ -7,7 +7,6 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { label: "HOME", href: "/" },
   { label: "SHOP", href: "/shop" },
-  { label: "GALLERY", href: "/gallery" },
   { label: "COMMUNITY", href: "/community" },
   { label: "TRACK ORDER", href: "/track-order" },
 ];

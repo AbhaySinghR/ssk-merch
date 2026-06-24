@@ -1,12 +1,21 @@
-import PhotoPlaceholder from "@/components/PhotoPlaceholder";
+import Image from "next/image";
 
-const moments = [
-  "REUNION PHOTOS COMING SOON",
-  "CHAPTER GATHERING PHOTOS COMING SOON",
-  "SCHOOL VISIT PHOTOS COMING SOON",
-  "FAMILY MEETUP PHOTOS COMING SOON",
-  "BATCH MEMORY PHOTOS COMING SOON",
-  "ALUMNI EVENT PHOTOS COMING SOON",
+const photos = [
+  "IMG_8058.JPG",
+  "IMG_8059.JPG",
+  "IMG_8060.JPG",
+  "IMG_8061.JPG",
+  "IMG_8062.JPG",
+  "IMG_8063.JPG",
+  "IMG_8064.JPG",
+  "IMG_8065.JPG",
+  "IMG_8066.JPG",
+  "IMG_8067.JPG",
+  "IMG_8068.JPG",
+  "IMG_8070.JPG",
+  "IMG_8071.JPG",
+  "IMG_8072.jpg",
+  "IMG_8074.jpg",
 ];
 
 export default function CommunityGallery() {
@@ -27,13 +36,20 @@ export default function CommunityGallery() {
           </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-3">
-          {moments.map((label, i) => (
-            <PhotoPlaceholder
-              key={i}
-              label={label}
-              className="aspect-square w-full"
-            />
+        <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-3">
+          {photos.map((file) => (
+            <div
+              key={file}
+              className="relative aspect-[4/3] w-full overflow-hidden border border-gold/20 bg-black/20"
+            >
+              <Image
+                src={`/images/community/${file}`}
+                alt="Saikapian alumni gathering"
+                fill
+                className="object-contain"
+                sizes="(min-width: 640px) 33vw, 50vw"
+              />
+            </div>
           ))}
         </div>
       </div>

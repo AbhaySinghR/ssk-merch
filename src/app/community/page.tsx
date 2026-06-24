@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CommunityHero from "@/components/CommunityHero";
-import ChaptersSection from "@/components/ChaptersSection";
 import CommunityGallery from "@/components/CommunityGallery";
 
 export const metadata: Metadata = {
@@ -17,7 +16,6 @@ export default function CommunityPage() {
       <Navbar />
       <main className="flex-1">
         <CommunityHero />
-        <ChaptersSection />
         <CommunityGallery />
       </main>
       <Footer />

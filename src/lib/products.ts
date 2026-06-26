@@ -31,7 +31,7 @@ export const products: Product[] = [
     name: "Black T-Shirt",
     category: "tshirt",
     categoryLabel: "T-Shirts",
-    price: 599,
+    price: 900,
     sizes: CLOTHING_SIZES,
     fabric: "Premium cotton-polyester pique knit, breathable and durable.",
     description:
@@ -46,7 +46,7 @@ export const products: Product[] = [
     name: "Maroon T-Shirt",
     category: "tshirt",
     categoryLabel: "T-Shirts",
-    price: 599,
+    price: 900,
     sizes: CLOTHING_SIZES,
     fabric: "Premium cotton-polyester pique knit, breathable and durable.",
     description:
@@ -62,7 +62,7 @@ export const products: Product[] = [
     name: "White T-Shirt",
     category: "tshirt",
     categoryLabel: "T-Shirts",
-    price: 599,
+    price: 900,
     sizes: CLOTHING_SIZES,
     fabric: "Premium cotton-polyester pique knit, breathable and durable.",
     description:
@@ -78,7 +78,7 @@ export const products: Product[] = [
     name: "Tracksuit",
     category: "tracksuit",
     categoryLabel: "Tracksuits",
-    price: 1499,
+    price: 2000,
     sizes: CLOTHING_SIZES,
     fabric: "Brushed polyester tracksuit fabric with a soft inner lining.",
     description:
@@ -158,7 +158,7 @@ export const products: Product[] = [
     name: "White Ceramic Mug",
     category: "accessories",
     categoryLabel: "Accessories",
-    price: 349,
+    price: 350,
     sizes: ONE_SIZE,
     fabric: "Premium ceramic, dishwasher and microwave safe.",
     description:
@@ -174,7 +174,7 @@ export const products: Product[] = [
     name: "Black Mug",
     category: "accessories",
     categoryLabel: "Accessories",
-    price: 349,
+    price: 350,
     sizes: ONE_SIZE,
     fabric: "Premium ceramic with a glossy black finish, dishwasher and microwave safe.",
     description:
@@ -190,7 +190,7 @@ export const products: Product[] = [
     name: "Frosted Beer Mug",
     category: "accessories",
     categoryLabel: "Accessories",
-    price: 449,
+    price: 350,
     sizes: ONE_SIZE,
     fabric: "Frosted glass, ideal for cold beverages.",
     description:
@@ -206,7 +206,7 @@ export const products: Product[] = [
     name: "Metal Mug",
     category: "accessories",
     categoryLabel: "Accessories",
-    price: 499,
+    price: 350,
     sizes: ONE_SIZE,
     fabric: "Stainless steel with double-walled insulation.",
     description:
@@ -216,6 +216,102 @@ export const products: Product[] = [
       { src: `${ACCESSORIES_DIR}/Metal Mug Back.png`, label: "Back" },
       { src: `${ACCESSORIES_DIR}/Metal Mug Side.png`, label: "Side" },
     ],
+  },
+  {
+    slug: "heritage-building-magnet",
+    name: "Heritage Building Magnet",
+    category: "accessories",
+    categoryLabel: "Accessories",
+    price: 200,
+    sizes: ONE_SIZE,
+    fabric: "Printed acrylic fridge magnet.",
+    description:
+      "Fridge magnet featuring an illustration of the Sainik School Kapurthala campus building.",
+    images: [{ src: `${ACCESSORIES_DIR}/Fridge Magnet 1.png`, label: "Front" }],
+  },
+  {
+    slug: "school-crest-magnet",
+    name: "School Crest Magnet",
+    category: "accessories",
+    categoryLabel: "Accessories",
+    price: 200,
+    sizes: ONE_SIZE,
+    fabric: "Printed acrylic fridge magnet.",
+    description:
+      "Circular fridge magnet featuring the Sainik School Kapurthala crest.",
+    images: [{ src: `${ACCESSORIES_DIR}/Fridge Magnet2.png`, label: "Front" }],
+  },
+  {
+    slug: "jitna-ragda-utna-tagda-magnet",
+    name: "Jitna Ragda Utna Tagda Magnet",
+    category: "accessories",
+    categoryLabel: "Accessories",
+    price: 200,
+    sizes: ONE_SIZE,
+    fabric: "Printed acrylic fridge magnet.",
+    description:
+      "A nostalgic nod to push-up punishments — every Saikapian's favourite inside joke, on a fridge magnet.",
+    images: [{ src: `${ACCESSORIES_DIR}/Fridge Magnet3.png`, label: "Front" }],
+  },
+  {
+    slug: "project-lao-magnet",
+    name: "Project Lao Magnet",
+    category: "accessories",
+    categoryLabel: "Accessories",
+    price: 200,
+    sizes: ONE_SIZE,
+    fabric: "Printed acrylic fridge magnet.",
+    description:
+      "Die-cut fridge magnet celebrating 'Project Lao' — the unforgettable cadet cooking sessions.",
+    images: [{ src: `${ACCESSORIES_DIR}/Fridge Magnet 4.png`, label: "Front" }],
+  },
+  {
+    slug: "chaman-dhaba-magnet",
+    name: "Chaman Dhaba Magnet",
+    category: "accessories",
+    categoryLabel: "Accessories",
+    price: 200,
+    sizes: ONE_SIZE,
+    fabric: "Printed acrylic fridge magnet.",
+    description:
+      "A tribute to Chaman Dhaba — every Saikapian's favourite escape for a plate of shahi paneer.",
+    images: [{ src: `${ACCESSORIES_DIR}/Fridge mAgent 5.png`, label: "Front" }],
+  },
+  {
+    slug: "school-barber-magnet",
+    name: "School Barber Magnet",
+    category: "accessories",
+    categoryLabel: "Accessories",
+    price: 200,
+    sizes: ONE_SIZE,
+    fabric: "Printed acrylic fridge magnet.",
+    description:
+      "'Our School Barber' — a fond, funny throwback to Billu Barber and mandatory haircut day, on a fridge magnet.",
+    images: [{ src: `${ACCESSORIES_DIR}/Fridge Magnet6.png`, label: "Front" }],
+  },
+  {
+    slug: "maroon-tie",
+    name: "Maroon Tie",
+    category: "accessories",
+    categoryLabel: "Accessories",
+    price: 499,
+    sizes: ONE_SIZE,
+    fabric: "Premium microfibre fabric, fine embroidered school logo.",
+    description:
+      "Classic solid maroon tie with the Sainik School Kapurthala crest embroidered in gold, personalised with your batch.",
+    images: [{ src: `${ACCESSORIES_DIR}/Tie Maroon.png`, label: "All Views" }],
+  },
+  {
+    slug: "striped-tie",
+    name: "Striped Tie",
+    category: "accessories",
+    categoryLabel: "Accessories",
+    price: 499,
+    sizes: ONE_SIZE,
+    fabric: "Premium microfibre fabric, fine embroidered school logo.",
+    description:
+      "Maroon-and-green striped tie with a repeating Sainik School Kapurthala crest pattern.",
+    images: [{ src: `${ACCESSORIES_DIR}/Tie2.png`, label: "Front" }],
   },
 ];
 

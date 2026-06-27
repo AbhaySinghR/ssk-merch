@@ -4,8 +4,7 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductGallery from "@/components/shop/ProductGallery";
-import SizeSelector from "@/components/shop/SizeSelector";
-import AddToCartButton from "@/components/shop/AddToCartButton";
+import ProductPurchasePanel from "@/components/shop/ProductPurchasePanel";
 import { getAllProducts, getProductBySlug } from "@/lib/products";
 
 export function generateStaticParams() {
@@ -77,13 +76,7 @@ export default async function ProductPage({
                 </p>
               </div>
 
-              <div className="mt-8 border-t border-gold/20 pt-6">
-                <SizeSelector sizes={product.sizes} />
-              </div>
-
-              <div className="mt-10">
-                <AddToCartButton productName={product.name} />
-              </div>
+              <ProductPurchasePanel product={product} />
             </div>
           </div>
         </div>

@@ -1,6 +1,8 @@
-"use client";
-
-import { motion } from "framer-motion";
+// Server Component — no "use client" here.
+// Animation is isolated in HeritageCard (a thin client wrapper)
+// so framer-motion JS only loads for the three animated cards,
+// not for the entire Heritage section.
+import HeritageCard from "./HeritageCard";
 
 const columns = [
   {
@@ -42,14 +44,7 @@ export default function Heritage() {
 
         <div className="grid grid-cols-1 divide-y divide-gold/20 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {columns.map((column, i) => (
-            <motion.div
-              key={column.numeral}
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: i * 0.15, ease: "easeOut" }}
-              className="px-0 py-10 sm:px-10 sm:py-0"
-            >
+            <HeritageCard key={column.numeral} index={i}>
               <span className="font-display text-3xl italic text-gold">
                 {column.numeral}
               </span>
@@ -59,7 +54,7 @@ export default function Heritage() {
               <p className="mt-4 text-sm leading-relaxed text-warm-grey">
                 {column.body}
               </p>
-            </motion.div>
+            </HeritageCard>
           ))}
         </div>
       </div>

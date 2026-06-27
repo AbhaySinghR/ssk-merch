@@ -1,8 +1,11 @@
 "use server";
 
 import { isValidPhoneNumber } from "libphonenumber-js";
-import { saveRegistration } from "@/lib/registrations";
+import { headers } from "next/headers";
+import { saveRegistrationToDb } from "@/lib/registrations";
 import { resend, RESEND_FROM_EMAIL } from "@/lib/resend";
+import { redis } from "@/lib/redis";
+import { Ratelimit } from "@upstash/ratelimit";
 import type { RegisterState, RegisterFieldErrors } from "./types";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -41,7 +44,40 @@ export async function registerUser(
     return { success: false, message: "", errors };
   }
 
-  await saveRegistration({
+  // Rate limit: 3 registrations per IP per hour + 1 per email per 24h
+  if (redis) {
+    const headerStore = await headers();
+    const ip =
+      headerStore.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+      headerStore.get("x-real-ip") ??
+      "unknown";
+
+    const ipLimiter = new Ratelimit({
+      redis,
+      limiter: Ratelimit.slidingWindow(3, "1 h"),
+      prefix: "ratelimit:register_ip",
+    });
+    const emailLimiter = new Ratelimit({
+      redis,
+      limiter: Ratelimit.slidingWindow(1, "24 h"),
+      prefix: "ratelimit:register_email",
+    });
+
+    const [ipResult, emailResult] = await Promise.all([
+      ipLimiter.limit(ip),
+      emailLimiter.limit(email),
+    ]);
+
+    if (!ipResult.success || !emailResult.success) {
+      return {
+        success: false,
+        message: "Too many registration attempts. Please try again later.",
+        errors: {},
+      };
+    }
+  }
+
+  await saveRegistrationToDb({
     title,
     firstName,
     lastName,
@@ -52,6 +88,47 @@ export async function registerUser(
     registeredAt: new Date().toISOString(),
   });
 
+  // Send verification email if Redis is configured
+  if (redis) {
+    const token = crypto.randomUUID();
+    await redis.set(`email_verify:${token}`, email, { ex: 86400 });
+
+    if (resend) {
+      try {
+        await resend.emails.send({
+          from: RESEND_FROM_EMAIL,
+          to: email,
+          subject: "Verify your email — Sainik School Kapurthala Merch",
+          html: `
+            <div style="font-family: Inter, Arial, sans-serif; background:#2c0a0a; padding:32px; color:#f5f0e8;">
+              <h1 style="font-family: Georgia, serif; color:#c9a84c; font-size:24px; margin-bottom:16px;">Verify your email</h1>
+              <p>Dear ${firstName},</p>
+              <p>Click the link below to verify your email and set your password.</p>
+              <p style="margin:24px 0;">
+                <a href="${process.env.NEXT_PUBLIC_SITE_URL}/auth/verify?token=${token}"
+                   style="background:#c9a84c; color:#1a0606; padding:12px 24px; text-decoration:none; font-weight:600; font-size:13px; letter-spacing:0.1em;">
+                  VERIFY EMAIL
+                </a>
+              </p>
+              <p style="font-size:12px; color:#a89080;">Link expires in 24 hours.</p>
+              <p style="margin-top:24px; letter-spacing:0.2em; font-size:11px; color:#a89080;">DISCIPLINE · HONOUR · SERVICE</p>
+            </div>
+          `,
+        });
+      } catch (error) {
+        console.error("Failed to send verification email:", error);
+      }
+    }
+
+    return {
+      success: true,
+      message:
+        "You're registered! Check your inbox for a verification email to set your password.",
+      errors: {},
+    };
+  }
+
+  // Redis not configured — fall back to confirmation email only
   if (!resend) {
     console.warn(
       "RESEND_API_KEY is not set — skipping confirmation email for",

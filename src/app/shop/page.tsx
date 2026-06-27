@@ -9,6 +9,9 @@ import {
   getPriceBounds,
 } from "@/lib/products";
 
+// Static product catalogue — fully cacheable, no per-request data
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "Shop | Sainik School Kapurthala Merch",
   description: "Official alumni merchandise for Sainik School Kapurthala.",

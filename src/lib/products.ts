@@ -8,6 +8,7 @@ export type ProductImage = {
 export type Product = {
   slug: string;
   name: string;
+  color?: string;
   category: ProductCategory;
   categoryLabel: string;
   price: number;
@@ -29,6 +30,7 @@ export const products: Product[] = [
   {
     slug: "black-tshirt",
     name: "Black T-Shirt",
+    color: "Black",
     category: "tshirt",
     categoryLabel: "T-Shirts",
     price: 599,
@@ -44,6 +46,7 @@ export const products: Product[] = [
   {
     slug: "maroon-tshirt",
     name: "Maroon T-Shirt",
+    color: "Maroon",
     category: "tshirt",
     categoryLabel: "T-Shirts",
     price: 599,
@@ -60,6 +63,7 @@ export const products: Product[] = [
   {
     slug: "white-tshirt",
     name: "White T-Shirt",
+    color: "White",
     category: "tshirt",
     categoryLabel: "T-Shirts",
     price: 599,
@@ -88,6 +92,7 @@ export const products: Product[] = [
   {
     slug: "black-cap",
     name: "Black Cap",
+    color: "Black",
     category: "cap",
     categoryLabel: "Caps",
     price: 399,
@@ -105,6 +110,7 @@ export const products: Product[] = [
   {
     slug: "blue-cap",
     name: "Blue Cap",
+    color: "Blue",
     category: "cap",
     categoryLabel: "Caps",
     price: 399,
@@ -122,6 +128,7 @@ export const products: Product[] = [
   {
     slug: "maroon-cap",
     name: "Maroon Cap",
+    color: "Maroon",
     category: "cap",
     categoryLabel: "Caps",
     price: 399,
@@ -139,6 +146,7 @@ export const products: Product[] = [
   {
     slug: "white-cap",
     name: "White Cap",
+    color: "White",
     category: "cap",
     categoryLabel: "Caps",
     price: 399,

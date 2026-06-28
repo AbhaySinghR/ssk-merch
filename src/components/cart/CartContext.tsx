@@ -94,6 +94,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   function clearCart() {
     setItems([]);
+    // Clear localStorage immediately — don't wait for the persistence effect.
+    // The Razorpay payment handler fires outside React's event loop, so the
+    // effect may not run before the user navigates away.
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // Ignore
+    }
   }
 
   const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);

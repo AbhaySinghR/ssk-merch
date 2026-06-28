@@ -1,16 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { useCart } from "@/components/cart/CartContext";
 import type { Product } from "@/lib/products";
-
-function isLoggedIn() {
-  // Reads the non-HTTP-only hint cookie set at login.
-  // The real auth is always verified server-side — this is UI-only.
-  return typeof document !== "undefined" &&
-    document.cookie.split(";").some((c) => c.trim() === "ssk_auth=1");
-}
 
 export default function ProductPurchasePanel({
   product,
@@ -20,14 +13,9 @@ export default function ProductPurchasePanel({
   const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
   const [added, setAdded] = useState(false);
   const { addItem } = useCart();
-  const router = useRouter();
 
   function handleAdd() {
     if (!selectedSize) return;
-    if (!isLoggedIn()) {
-      router.push("/auth/login");
-      return;
-    }
     addItem({
       slug: product.slug,
       name: product.name,
@@ -36,6 +24,7 @@ export default function ProductPurchasePanel({
       size: selectedSize,
       price: product.price,
     });
+    toast.success(`${product.name} (${selectedSize}) added to cart.`);
     setAdded(true);
     window.setTimeout(() => setAdded(false), 2000);
   }

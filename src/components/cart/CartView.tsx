@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "sonner";
 import { useCart } from "@/components/cart/CartContext";
 
 export default function CartView() {
@@ -96,7 +97,10 @@ export default function CartView() {
 
                 <button
                   type="button"
-                  onClick={() => removeItem(item.slug, item.size)}
+                  onClick={() => {
+                    removeItem(item.slug, item.size);
+                    toast.success(`${item.name} removed from cart.`);
+                  }}
                   className="text-xs tracking-[0.1em] text-warm-grey transition-colors hover:text-red-300"
                 >
                   REMOVE

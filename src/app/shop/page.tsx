@@ -13,8 +13,10 @@ import {
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "Shop | Sainik School Kapurthala Merch",
-  description: "Official alumni merchandise for Sainik School Kapurthala.",
+  title: "Saikapian Store — Official SSK Alumni Merchandise",
+  description:
+    "Shop official Sainik School Kapurthala merchandise: hoodies, caps, tees and mugs for SSK alumni and families. Ships across India.",
+  alternates: { canonical: "/shop" },
 };
 
 export default function ShopPage() {

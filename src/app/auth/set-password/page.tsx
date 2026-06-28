@@ -3,6 +3,7 @@
 import { Suspense, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { toast } from "sonner";
 import { setPassword } from "./actions";
 
 const inputClass =
@@ -60,9 +61,12 @@ function SetPasswordForm() {
     startTransition(async () => {
       const result = await setPassword(otp, password);
       if (result.success) {
+        toast.success("Password set! Please sign in.");
         router.push("/auth/login");
       } else {
-        setError(result.error ?? "Something went wrong.");
+        const msg = result.error ?? "Something went wrong.";
+        setError(msg);
+        toast.error(msg);
       }
     });
   }

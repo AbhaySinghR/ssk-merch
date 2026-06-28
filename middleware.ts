@@ -5,7 +5,7 @@ const ACCESS_SECRET = new TextEncoder().encode(
   process.env.JWT_ACCESS_SECRET ?? "",
 );
 
-const PROTECTED_ROUTES = ["/cart", "/checkout", "/account"];
+const PROTECTED_ROUTES = ["/checkout", "/account"];
 const ADMIN_ROUTES = ["/admin"];
 
 /** Extract the access_token value from Set-Cookie headers after a refresh. */
@@ -107,7 +107,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/cart/:path*",
     "/checkout/:path*",
     "/account/:path*",
     "/admin/:path*",

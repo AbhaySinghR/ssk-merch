@@ -24,7 +24,7 @@ export default function CommunityHero() {
 
       <div className="mx-auto mt-12 max-w-5xl border border-gold/20">
         <Image
-          src="/images/community/ssk_community_main.png"
+          src="/images/community/ssk_community_main.jpg"
           alt="Historic photograph of the Sainik School Kapurthala campus with a ceremonial elephant procession"
           width={1536}
           height={1024}

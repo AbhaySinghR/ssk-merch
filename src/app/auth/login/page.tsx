@@ -3,6 +3,7 @@
 import { Suspense, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { toast } from "sonner";
 import { login } from "./actions";
 
 const inputClass =
@@ -33,9 +34,12 @@ function LoginForm() {
     startTransition(async () => {
       const result = await login(email, password);
       if (result.success) {
+        toast.success(result.role === "admin" ? "Welcome back, Admin." : "Signed in successfully.");
         router.push(result.role === "admin" ? "/admin" : redirect);
       } else {
-        setError(result.error ?? "Something went wrong.");
+        const msg = result.error ?? "Something went wrong.";
+        setError(msg);
+        toast.error(msg);
       }
     });
   }

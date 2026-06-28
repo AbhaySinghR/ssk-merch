@@ -4,6 +4,7 @@ import { useActionState, useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import { toast } from "sonner";
 import { registerUser } from "@/app/sign-in/actions";
 import { initialRegisterState } from "@/app/sign-in/types";
 
@@ -89,6 +90,14 @@ export default function RegisterForm() {
   );
   const [phone, setPhone] = useState<string>("");
   const [title, setTitle] = useState<string>("");
+
+  useEffect(() => {
+    if (state.success) {
+      toast.success("Registration complete! Check your inbox.");
+    } else if (!state.success && state.message) {
+      toast.error(state.message);
+    }
+  }, [state]);
 
   if (state.success) {
     return (
@@ -211,6 +220,12 @@ export default function RegisterForm() {
           <FieldError message={state.errors.batch} />
         </div>
       </div>
+
+      {!state.success && state.message && (
+        <p className="border border-red-400/30 bg-red-900/20 px-4 py-3 text-xs text-red-300">
+          {state.message}
+        </p>
+      )}
 
       <button
         type="submit"

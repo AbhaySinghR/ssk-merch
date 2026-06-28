@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useCart } from "@/components/cart/CartContext";
+import { toast } from "sonner";
 import { initOrder, verifyPayment } from "@/app/checkout/actions";
 import type { AddressFields } from "@/app/checkout/actions";
 
@@ -67,13 +68,16 @@ export default function CheckoutForm({ prefill }: { prefill?: Prefill }) {
       const result = await initOrder(address, items);
       if (!result.success) {
         setError(result.error);
+        toast.error(result.error);
         return;
       }
 
       try {
         await loadRazorpay();
       } catch {
-        setError("Could not load payment gateway. Please try again.");
+        const msg = "Could not load payment gateway. Please try again.";
+        setError(msg);
+        toast.error(msg);
         return;
       }
 
@@ -100,10 +104,11 @@ export default function CheckoutForm({ prefill }: { prefill?: Prefill }) {
             clearCart();
             setSuccessOrderId(razorpayOrderId);
             setOrderSuccess(true);
+            toast.success("Order placed successfully!");
           } else {
-            setError(
-              verification.error ?? "Payment verification failed. Contact support.",
-            );
+            const msg = verification.error ?? "Payment verification failed. Contact support.";
+            setError(msg);
+            toast.error(msg);
           }
         },
         prefill: {

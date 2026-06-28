@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronDown, Check, Loader } from "lucide-react";
+import { toast } from "sonner";
 import { updateOrderStatus } from "./actions";
 
 const STATUSES = ["pending", "packed", "shipped", "delivered"] as const;
@@ -34,8 +35,10 @@ export default function OrderStatusSelect({
       const result = await updateOrderStatus(orderId, status);
       if (!result.success) {
         setSaveError(result.error);
+        toast.error(result.error);
         return;
       }
+      toast.success(`Order status updated to ${status.toUpperCase()}.`);
       router.refresh();
     });
   }

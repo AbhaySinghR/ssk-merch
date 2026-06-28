@@ -5,7 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/lib/products";
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  priority = false,
+}: {
+  product: Product;
+  priority?: boolean;
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeImage = product.images[activeIndex];
 
@@ -19,6 +25,7 @@ export default function ProductCard({ product }: { product: Product }) {
           src={activeImage.src}
           alt={`${product.name} — ${activeImage.label} view`}
           fill
+          priority={priority}
           className="object-contain p-6 transition-transform duration-300 group-hover:scale-105"
           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
         />

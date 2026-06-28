@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
+import { toast } from "sonner";
 import { requestPasswordReset } from "./actions";
 
 const inputClass =
@@ -21,8 +22,10 @@ export default function ForgotPasswordPage() {
       const result = await requestPasswordReset(email);
       if (result.success) {
         setSubmitted(true);
+        toast.success("Reset link sent! Check your inbox.");
       } else {
         setError(result.error);
+        toast.error(result.error);
       }
     });
   }

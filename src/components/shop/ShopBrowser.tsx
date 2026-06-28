@@ -87,8 +87,8 @@ export default function ShopBrowser({
             </p>
           ) : (
             <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:gap-6">
-              {filteredProducts.map((product) => (
-                <ProductCard key={product.slug} product={product} />
+              {filteredProducts.map((product, i) => (
+                <ProductCard key={product.slug} product={product} priority={i < 4} />
               ))}
             </div>
           )}

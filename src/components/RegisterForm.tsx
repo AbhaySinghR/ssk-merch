@@ -1,8 +1,10 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useState, useRef, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import { toast } from "sonner";
 import { registerUser } from "@/app/sign-in/actions";
 import { initialRegisterState } from "@/app/sign-in/types";
 
@@ -16,12 +18,86 @@ function FieldError({ message }: { message?: string }) {
 const inputClass =
   "w-full border border-cream/20 bg-transparent px-4 py-3 text-sm text-cream placeholder:text-warm-grey/60 outline-none transition-colors focus:border-gold";
 
+function TitleDropdown({
+  error,
+  value,
+  onChange,
+}: {
+  error?: string;
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleOutside);
+    return () => document.removeEventListener("mousedown", handleOutside);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      {/* Hidden input so the value is included in the form data */}
+      <input type="hidden" name="title" value={value} />
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className={`${inputClass} mt-2 flex items-center justify-between`}
+      >
+        <span className={value ? "text-cream" : "text-warm-grey/60"}>
+          {value || "Select"}
+        </span>
+        <ChevronDown
+          size={14}
+          className={`text-warm-grey transition-transform duration-150 ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      {open && (
+        <div className="absolute left-0 right-0 top-full z-20 border border-gold/20 bg-maroon-dark shadow-xl">
+          {TITLES.map((t) => (
+            <button
+              key={t}
+              type="button"
+              onClick={() => {
+                onChange(t);
+                setOpen(false);
+              }}
+              className={`w-full px-4 py-2.5 text-left text-sm transition-colors hover:bg-maroon hover:text-gold ${
+                value === t ? "text-gold" : "text-cream"
+              }`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <FieldError message={error} />
+    </div>
+  );
+}
+
 export default function RegisterForm() {
   const [state, formAction, pending] = useActionState(
     registerUser,
     initialRegisterState,
   );
   const [phone, setPhone] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+
+  useEffect(() => {
+    if (state.success) {
+      toast.success("Registration complete! Check your inbox.");
+    } else if (!state.success && state.message) {
+      toast.error(state.message);
+    }
+  }, [state]);
 
   if (state.success) {
     return (
@@ -41,25 +117,14 @@ export default function RegisterForm() {
     <form action={formAction} className="space-y-6">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-[120px_1fr_1fr]">
         <div>
-          <label htmlFor="title" className="text-xs tracking-[0.2em] text-warm-grey">
+          <label className="text-xs tracking-[0.2em] text-warm-grey">
             TITLE
           </label>
-          <select
-            id="title"
-            name="title"
-            defaultValue=""
-            className={`${inputClass} mt-2 bg-maroon-dark`}
-          >
-            <option value="" disabled>
-              Select
-            </option>
-            {TITLES.map((t) => (
-              <option key={t} value={t} className="bg-maroon-dark">
-                {t}
-              </option>
-            ))}
-          </select>
-          <FieldError message={state.errors.title} />
+          <TitleDropdown
+            value={title}
+            onChange={setTitle}
+            error={state.errors.title}
+          />
         </div>
 
         <div>
@@ -155,6 +220,12 @@ export default function RegisterForm() {
           <FieldError message={state.errors.batch} />
         </div>
       </div>
+
+      {!state.success && state.message && (
+        <p className="border border-red-400/30 bg-red-900/20 px-4 py-3 text-xs text-red-300">
+          {state.message}
+        </p>
+      )}
 
       <button
         type="submit"

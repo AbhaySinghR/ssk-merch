@@ -8,6 +8,7 @@ export type ProductImage = {
 export type Product = {
   slug: string;
   name: string;
+  color?: string;
   category: ProductCategory;
   categoryLabel: string;
   price: number;
@@ -29,6 +30,7 @@ export const products: Product[] = [
   {
     slug: "black-tshirt",
     name: "Black T-Shirt",
+    color: "Black",
     category: "tshirt",
     categoryLabel: "T-Shirts",
     price: 900,
@@ -37,13 +39,14 @@ export const products: Product[] = [
     description:
       "Classic polo tee in maroon-and-gold school colours, embroidered with the Sainik School Kapurthala crest.",
     images: [
-      { src: `${CLOTHING_DIR}/Black Front.png`, label: "Front" },
-      { src: `${CLOTHING_DIR}/Black Side.png`, label: "Side" },
+      { src: `${CLOTHING_DIR}/Black Front.jpg`, label: "Front" },
+      { src: `${CLOTHING_DIR}/Black Side.jpg`, label: "Side" },
     ],
   },
   {
     slug: "maroon-tshirt",
     name: "Maroon T-Shirt",
+    color: "Maroon",
     category: "tshirt",
     categoryLabel: "T-Shirts",
     price: 900,
@@ -52,14 +55,15 @@ export const products: Product[] = [
     description:
       "Classic polo tee in the school's signature maroon, embroidered with the Sainik School Kapurthala crest.",
     images: [
-      { src: `${CLOTHING_DIR}/Maroon Front.png`, label: "Front" },
-      { src: `${CLOTHING_DIR}/Maroon Back.png`, label: "Back" },
-      { src: `${CLOTHING_DIR}/Maroon Side.png`, label: "Side" },
+      { src: `${CLOTHING_DIR}/Maroon Front.jpg`, label: "Front" },
+      { src: `${CLOTHING_DIR}/Maroon Back.jpg`, label: "Back" },
+      { src: `${CLOTHING_DIR}/Maroon Side.jpg`, label: "Side" },
     ],
   },
   {
     slug: "white-tshirt",
     name: "White T-Shirt",
+    color: "White",
     category: "tshirt",
     categoryLabel: "T-Shirts",
     price: 900,
@@ -68,9 +72,9 @@ export const products: Product[] = [
     description:
       "Classic polo tee in clean white, embroidered with the Sainik School Kapurthala crest.",
     images: [
-      { src: `${CLOTHING_DIR}/White Front.png`, label: "Front" },
-      { src: `${CLOTHING_DIR}/White Back.png`, label: "Back" },
-      { src: `${CLOTHING_DIR}/White Side.png`, label: "Side" },
+      { src: `${CLOTHING_DIR}/White Front.jpg`, label: "Front" },
+      { src: `${CLOTHING_DIR}/White Back.jpg`, label: "Back" },
+      { src: `${CLOTHING_DIR}/White Side.jpg`, label: "Side" },
     ],
   },
   {
@@ -83,11 +87,12 @@ export const products: Product[] = [
     fabric: "Brushed polyester tracksuit fabric with a soft inner lining.",
     description:
       "Full-zip tracksuit jacket and trousers in black, trimmed in gold with 'SAIKAPIAN' printed across the back.",
-    images: [{ src: `${CLOTHING_DIR}/TrackSuit.png`, label: "Front & Back" }],
+    images: [{ src: `${CLOTHING_DIR}/TrackSuit.jpg`, label: "Front & Back" }],
   },
   {
     slug: "black-cap",
     name: "Black Cap",
+    color: "Black",
     category: "cap",
     categoryLabel: "Caps",
     price: 399,
@@ -96,15 +101,16 @@ export const products: Product[] = [
     description:
       "Embroidered baseball cap in black with the Sainik School Kapurthala crest, personalised with roll number and batch.",
     images: [
-      { src: `${CLOTHING_DIR}/Black Cap Fronyt.png`, label: "Front" },
-      { src: `${CLOTHING_DIR}/Black Cap Back.png`, label: "Back" },
-      { src: `${CLOTHING_DIR}/Black Cap Side.png`, label: "Left Side" },
-      { src: `${CLOTHING_DIR}/Black Cap Side1.png`, label: "Right Side" },
+      { src: `${CLOTHING_DIR}/Black Cap Fronyt.jpg`, label: "Front" },
+      { src: `${CLOTHING_DIR}/Black Cap Back.jpg`, label: "Back" },
+      { src: `${CLOTHING_DIR}/Black Cap Side.jpg`, label: "Left Side" },
+      { src: `${CLOTHING_DIR}/Black Cap Side1.jpg`, label: "Right Side" },
     ],
   },
   {
     slug: "blue-cap",
     name: "Blue Cap",
+    color: "Blue",
     category: "cap",
     categoryLabel: "Caps",
     price: 399,
@@ -113,15 +119,16 @@ export const products: Product[] = [
     description:
       "Embroidered baseball cap in navy blue with the Sainik School Kapurthala crest, personalised with roll number and batch.",
     images: [
-      { src: `${CLOTHING_DIR}/Blue Cap Front.png`, label: "Front" },
-      { src: `${CLOTHING_DIR}/Blue Cap Back.png`, label: "Back" },
-      { src: `${CLOTHING_DIR}/Blue Cap Side.png`, label: "Left Side" },
-      { src: `${CLOTHING_DIR}/Blue Cap side1.png`, label: "Right Side" },
+      { src: `${CLOTHING_DIR}/Blue Cap Front.jpg`, label: "Front" },
+      { src: `${CLOTHING_DIR}/Blue Cap Back.jpg`, label: "Back" },
+      { src: `${CLOTHING_DIR}/Blue Cap Side.jpg`, label: "Left Side" },
+      { src: `${CLOTHING_DIR}/Blue Cap side1.jpg`, label: "Right Side" },
     ],
   },
   {
     slug: "maroon-cap",
     name: "Maroon Cap",
+    color: "Maroon",
     category: "cap",
     categoryLabel: "Caps",
     price: 399,
@@ -130,15 +137,16 @@ export const products: Product[] = [
     description:
       "Embroidered baseball cap in maroon with the Sainik School Kapurthala crest, personalised with roll number and batch.",
     images: [
-      { src: `${CLOTHING_DIR}/Maroon Cap Front.png`, label: "Front" },
+      { src: `${CLOTHING_DIR}/Maroon Cap Front.jpg`, label: "Front" },
       { src: `${CLOTHING_DIR}/Maroon Cap Back.png`, label: "Back" },
-      { src: `${CLOTHING_DIR}/Maroon Cap Side.png`, label: "Left Side" },
-      { src: `${CLOTHING_DIR}/Maroon Cap Side1.png`, label: "Right Side" },
+      { src: `${CLOTHING_DIR}/Maroon Cap Side.jpg`, label: "Left Side" },
+      { src: `${CLOTHING_DIR}/Maroon Cap Side1.jpg`, label: "Right Side" },
     ],
   },
   {
     slug: "white-cap",
     name: "White Cap",
+    color: "White",
     category: "cap",
     categoryLabel: "Caps",
     price: 399,
@@ -147,10 +155,10 @@ export const products: Product[] = [
     description:
       "Embroidered baseball cap in white with the Sainik School Kapurthala crest, personalised with roll number and batch.",
     images: [
-      { src: `${CLOTHING_DIR}/White Cap Front.png`, label: "Front" },
-      { src: `${CLOTHING_DIR}/White cap Back.png`, label: "Back" },
-      { src: `${CLOTHING_DIR}/White Cap Side.png`, label: "Left Side" },
-      { src: `${CLOTHING_DIR}/White Cap Side1.png`, label: "Right Side" },
+      { src: `${CLOTHING_DIR}/White Cap Front.jpg`, label: "Front" },
+      { src: `${CLOTHING_DIR}/White cap Back.jpg`, label: "Back" },
+      { src: `${CLOTHING_DIR}/White Cap Side.jpg`, label: "Left Side" },
+      { src: `${CLOTHING_DIR}/White Cap Side1.jpg`, label: "Right Side" },
     ],
   },
   {
@@ -164,9 +172,9 @@ export const products: Product[] = [
     description:
       "Classic white ceramic mug printed with the Sainik School Kapurthala crest.",
     images: [
-      { src: `${ACCESSORIES_DIR}/White Mug Front.png`, label: "Front" },
-      { src: `${ACCESSORIES_DIR}/White Mug Back.png`, label: "Back" },
-      { src: `${ACCESSORIES_DIR}/White Mug Side.png`, label: "Side" },
+      { src: `${ACCESSORIES_DIR}/White Mug Front.jpg`, label: "Front" },
+      { src: `${ACCESSORIES_DIR}/White Mug Back.jpg`, label: "Back" },
+      { src: `${ACCESSORIES_DIR}/White Mug Side.jpg`, label: "Side" },
     ],
   },
   {
@@ -180,9 +188,9 @@ export const products: Product[] = [
     description:
       "Glossy black ceramic mug printed with the Sainik School Kapurthala crest.",
     images: [
-      { src: `${ACCESSORIES_DIR}/Black Mug Front.png`, label: "Front" },
-      { src: `${ACCESSORIES_DIR}/Black Mug Back.png`, label: "Back" },
-      { src: `${ACCESSORIES_DIR}/Black Mug Side.png`, label: "Side" },
+      { src: `${ACCESSORIES_DIR}/Black Mug Front.jpg`, label: "Front" },
+      { src: `${ACCESSORIES_DIR}/Black Mug Back.jpg`, label: "Back" },
+      { src: `${ACCESSORIES_DIR}/Black Mug Side.jpg`, label: "Side" },
     ],
   },
   {
@@ -196,9 +204,9 @@ export const products: Product[] = [
     description:
       "Frosted glass beer mug etched with the Sainik School Kapurthala crest — a toast to the old days.",
     images: [
-      { src: `${ACCESSORIES_DIR}/Beer mug Front.png`, label: "Front" },
-      { src: `${ACCESSORIES_DIR}/Beer Mug Back.png`, label: "Back" },
-      { src: `${ACCESSORIES_DIR}/Beer Mug Side.png`, label: "Side" },
+      { src: `${ACCESSORIES_DIR}/Beer mug Front.jpg`, label: "Front" },
+      { src: `${ACCESSORIES_DIR}/Beer Mug Back.jpg`, label: "Back" },
+      { src: `${ACCESSORIES_DIR}/Beer Mug Side.jpg`, label: "Side" },
     ],
   },
   {
@@ -212,9 +220,9 @@ export const products: Product[] = [
     description:
       "Double-walled stainless steel mug printed with the Sainik School Kapurthala crest, keeps drinks hot or cold for longer.",
     images: [
-      { src: `${ACCESSORIES_DIR}/Metal Mug Front.png`, label: "Front" },
-      { src: `${ACCESSORIES_DIR}/Metal Mug Back.png`, label: "Back" },
-      { src: `${ACCESSORIES_DIR}/Metal Mug Side.png`, label: "Side" },
+      { src: `${ACCESSORIES_DIR}/Metal Mug Front.jpg`, label: "Front" },
+      { src: `${ACCESSORIES_DIR}/Metal Mug Back.jpg`, label: "Back" },
+      { src: `${ACCESSORIES_DIR}/Metal Mug Side.jpg`, label: "Side" },
     ],
   },
   {

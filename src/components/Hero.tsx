@@ -42,11 +42,12 @@ export default function Hero() {
 
         <div className="flex justify-center lg:shrink-0 lg:justify-end">
           <Image
-            src="/images/branding/crest.png"
+            src="/images/branding/crest.jpg"
             alt="Sainik School Kapurthala crest"
             width={420}
             height={420}
             priority
+            sizes="(max-width: 640px) 224px, (max-width: 1024px) 288px, 420px"
             className="h-auto w-56 sm:w-72 lg:w-[420px]"
           />
         </div>

@@ -1,19 +1,19 @@
 import Image from "next/image";
 
 const photos = [
-  "IMG_8058.JPG",
-  "IMG_8059.JPG",
-  "IMG_8060.JPG",
-  "IMG_8061.JPG",
-  "IMG_8062.JPG",
-  "IMG_8063.JPG",
-  "IMG_8064.JPG",
-  "IMG_8065.JPG",
-  "IMG_8066.JPG",
-  "IMG_8067.JPG",
-  "IMG_8068.JPG",
-  "IMG_8070.JPG",
-  "IMG_8071.JPG",
+  "IMG_8058.jpg",
+  "IMG_8059.jpg",
+  "IMG_8060.jpg",
+  "IMG_8061.jpg",
+  "IMG_8062.jpg",
+  "IMG_8063.jpg",
+  "IMG_8064.jpg",
+  "IMG_8065.jpg",
+  "IMG_8066.jpg",
+  "IMG_8067.jpg",
+  "IMG_8068.jpg",
+  "IMG_8070.jpg",
+  "IMG_8071.jpg",
   "IMG_8072.jpg",
   "IMG_8074.jpg",
 ];
@@ -40,7 +40,7 @@ export default function CommunityGallery() {
           {photos.map((file) => (
             <div
               key={file}
-              className="relative aspect-[4/3] w-full overflow-hidden border border-gold/20 bg-black/20"
+              className="relative aspect-[4/3] w-full overflow-hidden border border-gold/20 bg-maroon-dark"
             >
               <Image
                 src={`/images/community/${file}`}

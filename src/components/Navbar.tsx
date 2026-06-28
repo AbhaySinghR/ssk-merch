@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, ChevronDown } from "lucide-react";
+import CartIcon from "@/components/cart/CartIcon";
 
 const navLinks = [
   { label: "HOME", href: "/" },
@@ -11,8 +12,42 @@ const navLinks = [
   { label: "TRACK ORDER", href: "/track-order" },
 ];
 
+function checkAuth(): boolean {
+  return (
+    typeof document !== "undefined" &&
+    document.cookie.split(";").some((c) => c.trim() === "ssk_auth=1")
+  );
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
+  const accountRef = useRef<HTMLDivElement>(null);
+
+  // Defer cookie read out of the effect body to avoid cascading renders.
+  // setTimeout(0) pushes the setState call to the next task, satisfying the
+  // react-hooks/set-state-in-effect rule while still being client-only.
+  useEffect(() => {
+    const id = setTimeout(() => {
+      setLoggedIn(checkAuth());
+    }, 0);
+    return () => clearTimeout(id);
+  }, []);
+
+  // Close account dropdown when clicking outside
+  useEffect(() => {
+    function handleOutside(e: MouseEvent) {
+      if (
+        accountRef.current &&
+        !accountRef.current.contains(e.target as Node)
+      ) {
+        setAccountOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleOutside);
+    return () => document.removeEventListener("mousedown", handleOutside);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b border-gold/20 bg-maroon-dark">
@@ -29,6 +64,7 @@ export default function Navbar() {
           </div>
         </div>
 
+        {/* Desktop nav links */}
         <ul className="hidden items-center gap-3 text-xs tracking-[0.2em] text-cream/90 lg:flex">
           {navLinks.map((link, i) => (
             <li key={link.label} className="flex items-center gap-3">
@@ -42,13 +78,57 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <Link
-          href="/sign-in"
-          className="hidden text-xs tracking-[0.2em] text-cream transition-colors hover:text-gold lg:inline"
-        >
-          SIGN IN
-        </Link>
+        {/* Desktop right side */}
+        <div className="hidden items-center gap-4 lg:flex">
+          <CartIcon />
 
+          {loggedIn ? (
+            <div className="relative" ref={accountRef}>
+              <button
+                type="button"
+                onClick={() => setAccountOpen((v) => !v)}
+                className="flex items-center gap-1.5 text-xs tracking-[0.2em] text-cream transition-colors hover:text-gold"
+              >
+                <User size={15} />
+                ACCOUNT
+                <ChevronDown
+                  size={12}
+                  className={`transition-transform ${accountOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {accountOpen && (
+                <div className="absolute right-0 top-full mt-2 w-44 border border-gold/20 bg-maroon-dark shadow-xl">
+                  <Link
+                    href="/account"
+                    onClick={() => setAccountOpen(false)}
+                    className="block px-4 py-3 text-xs tracking-[0.15em] text-warm-grey transition-colors hover:text-cream"
+                  >
+                    MY ORDERS
+                  </Link>
+                  <div className="border-t border-gold/10" />
+                  <form method="POST" action="/auth/logout">
+                    <button
+                      type="submit"
+                      className="block w-full px-4 py-3 text-left text-xs tracking-[0.15em] text-warm-grey transition-colors hover:text-cream"
+                    >
+                      LOGOUT
+                    </button>
+                  </form>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link
+              href="/auth/login"
+              className="text-xs tracking-[0.2em] text-cream transition-colors hover:text-gold"
+            >
+              SIGN IN
+            </Link>
+          )}
+        </div>
+
+        {/* Mobile hamburger */}
         <button
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -60,6 +140,7 @@ export default function Navbar() {
         </button>
       </nav>
 
+      {/* Mobile drawer */}
       {open && (
         <div className="border-t border-gold/20 bg-maroon-dark px-6 py-6 lg:hidden">
           <ul className="flex flex-col gap-4 text-xs tracking-[0.2em] text-cream/90">
@@ -74,15 +155,49 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
-            <li className="pt-2">
+            <li>
               <Link
-                href="/sign-in"
+                href="/cart"
                 onClick={() => setOpen(false)}
-                className="text-gold transition-colors hover:text-cream"
+                className="transition-colors hover:text-gold"
               >
-                SIGN IN
+                CART
               </Link>
             </li>
+
+            {loggedIn ? (
+              <>
+                <li>
+                  <Link
+                    href="/account"
+                    onClick={() => setOpen(false)}
+                    className="transition-colors hover:text-gold"
+                  >
+                    MY ORDERS
+                  </Link>
+                </li>
+                <li className="pt-2">
+                  <form method="POST" action="/auth/logout">
+                    <button
+                      type="submit"
+                      className="text-gold transition-colors hover:text-cream"
+                    >
+                      LOGOUT
+                    </button>
+                  </form>
+                </li>
+              </>
+            ) : (
+              <li className="pt-2">
+                <Link
+                  href="/auth/login"
+                  onClick={() => setOpen(false)}
+                  className="text-gold transition-colors hover:text-cream"
+                >
+                  SIGN IN
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       )}

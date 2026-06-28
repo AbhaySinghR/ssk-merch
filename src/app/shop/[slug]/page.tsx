@@ -4,8 +4,7 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductGallery from "@/components/shop/ProductGallery";
-import SizeSelector from "@/components/shop/SizeSelector";
-import AddToCartButton from "@/components/shop/AddToCartButton";
+import ProductPurchasePanel from "@/components/shop/ProductPurchasePanel";
 import { getAllProducts, getProductBySlug } from "@/lib/products";
 
 export function generateStaticParams() {
@@ -20,9 +19,29 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) return { title: "Product Not Found" };
+
+  const title = `${product.name} — Sainik School Kapurthala Merch`;
+  const description = product.description.slice(0, 155);
+  const url = `/shop/${product.slug}`;
+  const image = `https://saikap.in${product.images[0].src}`;
+
   return {
-    title: `${product.name} | Sainik School Kapurthala Merch`,
-    description: product.description,
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "website",
+      title,
+      description,
+      url,
+      images: [{ url: image, width: 1200, height: 1200, alt: product.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
   };
 }
 
@@ -38,8 +57,49 @@ export default async function ProductPage({
     notFound();
   }
 
+  const productLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: product.images.map((img) => `https://saikap.in${img.src}`),
+    sku: product.slug,
+    brand: { "@type": "Brand", name: "Saikap" },
+    offers: {
+      "@type": "Offer",
+      url: `https://saikap.in/shop/${product.slug}`,
+      priceCurrency: "INR",
+      price: product.price.toFixed(2),
+      availability: "https://schema.org/InStock",
+      itemCondition: "https://schema.org/NewCondition",
+    },
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://saikap.in" },
+      { "@type": "ListItem", position: 2, name: "Store", item: "https://saikap.in/shop" },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.name,
+        item: `https://saikap.in/shop/${product.slug}`,
+      },
+    ],
+  };
+
   return (
     <div className="flex flex-1 flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <Navbar />
       <main className="flex-1 bg-maroon">
         <div className="mx-auto max-w-6xl px-6 py-16 lg:px-10">
@@ -77,13 +137,7 @@ export default async function ProductPage({
                 </p>
               </div>
 
-              <div className="mt-8 border-t border-gold/20 pt-6">
-                <SizeSelector sizes={product.sizes} />
-              </div>
-
-              <div className="mt-10">
-                <AddToCartButton productName={product.name} />
-              </div>
+              <ProductPurchasePanel product={product} />
             </div>
           </div>
         </div>

@@ -1,4 +1,9 @@
-export type ProductCategory = "tshirt" | "tracksuit" | "cap" | "accessories";
+export type ProductCategory =
+  | "tshirt"
+  | "tracksuit"
+  | "sweatshirt"
+  | "cap"
+  | "accessories";
 
 export type ProductImage = {
   src: string;
@@ -37,10 +42,30 @@ export const products: Product[] = [
     sizes: CLOTHING_SIZES,
     fabric: "Premium cotton-polyester pique knit, breathable and durable.",
     description:
-      "Classic polo tee in maroon-and-gold school colours, embroidered with the Sainik School Kapurthala crest.",
+      "Classic polo tee in black with tipped collar and cuffs, 'SAIKAPIAN' embroidered across the back and the Sainik School Kapurthala crest on the chest.",
     images: [
-      { src: `${CLOTHING_DIR}/Black Front.jpg`, label: "Front" },
-      { src: `${CLOTHING_DIR}/Black Side.jpg`, label: "Side" },
+      { src: `${CLOTHING_DIR}/Black Tshirt Front.png`, label: "Front" },
+      { src: `${CLOTHING_DIR}/Black Tshirt Back.png`, label: "Back" },
+      { src: `${CLOTHING_DIR}/Black Tshirt Side.png`, label: "Side" },
+      { src: `${CLOTHING_DIR}/Black Tshirt Side1.png`, label: "Side 2" },
+    ],
+  },
+  {
+    slug: "blue-tshirt",
+    name: "Blue T-Shirt",
+    color: "Blue",
+    category: "tshirt",
+    categoryLabel: "T-Shirts",
+    price: 900,
+    sizes: CLOTHING_SIZES,
+    fabric: "Premium cotton-polyester pique knit, breathable and durable.",
+    description:
+      "Classic polo tee in navy blue with tipped collar and cuffs, 'SAIKAPIAN' embroidered across the back and the Sainik School Kapurthala crest on the chest.",
+    images: [
+      { src: `${CLOTHING_DIR}/Blue Tshirt Front.png`, label: "Front" },
+      { src: `${CLOTHING_DIR}/Blue Tshirt Back.png`, label: "Back" },
+      { src: `${CLOTHING_DIR}/Blue Tshirt Side1.png`, label: "Side" },
+      { src: `${CLOTHING_DIR}/Blue Tshirt Side2.png`, label: "Side 2" },
     ],
   },
   {
@@ -53,11 +78,12 @@ export const products: Product[] = [
     sizes: CLOTHING_SIZES,
     fabric: "Premium cotton-polyester pique knit, breathable and durable.",
     description:
-      "Classic polo tee in the school's signature maroon, embroidered with the Sainik School Kapurthala crest.",
+      "Classic polo tee in the school's signature maroon with tipped collar and cuffs, 'SAIKAPIAN' embroidered across the back and the Sainik School Kapurthala crest on the chest.",
     images: [
-      { src: `${CLOTHING_DIR}/Maroon Front.jpg`, label: "Front" },
-      { src: `${CLOTHING_DIR}/Maroon Back.jpg`, label: "Back" },
-      { src: `${CLOTHING_DIR}/Maroon Side.jpg`, label: "Side" },
+      { src: `${CLOTHING_DIR}/Maroon Tshirt Front.png`, label: "Front" },
+      { src: `${CLOTHING_DIR}/Maroon Tshirt Back.png`, label: "Back" },
+      { src: `${CLOTHING_DIR}/Maroon Tshirt Side.png`, label: "Side" },
+      { src: `${CLOTHING_DIR}/Maroon Tshirt Side1.png`, label: "Side 2" },
     ],
   },
   {
@@ -70,24 +96,101 @@ export const products: Product[] = [
     sizes: CLOTHING_SIZES,
     fabric: "Premium cotton-polyester pique knit, breathable and durable.",
     description:
-      "Classic polo tee in clean white, embroidered with the Sainik School Kapurthala crest.",
+      "Classic polo tee in clean white with tipped collar and cuffs, 'SAIKAPIAN' embroidered across the back and the Sainik School Kapurthala crest on the chest.",
     images: [
-      { src: `${CLOTHING_DIR}/White Front.jpg`, label: "Front" },
-      { src: `${CLOTHING_DIR}/White Back.jpg`, label: "Back" },
-      { src: `${CLOTHING_DIR}/White Side.jpg`, label: "Side" },
+      { src: `${CLOTHING_DIR}/White Tshirt Front.png`, label: "Front" },
+      { src: `${CLOTHING_DIR}/White Tshirt Back.png`, label: "Back" },
+      { src: `${CLOTHING_DIR}/White Tshirt Side1.png`, label: "Side" },
+      { src: `${CLOTHING_DIR}/White Tshirt Side2.png`, label: "Side 2" },
     ],
   },
   {
-    slug: "tracksuit",
-    name: "Tracksuit",
+    slug: "black-halfsleeve-tshirt",
+    name: "Black Half-Sleeve T-Shirt",
+    color: "Black",
+    category: "tshirt",
+    categoryLabel: "T-Shirts",
+    price: 900,
+    sizes: CLOTHING_SIZES,
+    fabric: "Premium cotton-polyester pique knit, breathable and durable.",
+    description:
+      "Short-sleeve quarter-zip pullover in black, embroidered with the Sainik School Kapurthala crest — a lighter layer for warmer days.",
+    images: [
+      { src: `${CLOTHING_DIR}/Black HalfSleeve Front.png`, label: "Front" },
+      { src: `${CLOTHING_DIR}/Black HalfSleeve Back.png`, label: "Back" },
+      { src: `${CLOTHING_DIR}/Black HalfSleeve Side.png`, label: "Side" },
+      { src: `${CLOTHING_DIR}/Black HalfSleeve Side2.png`, label: "Side 2" },
+    ],
+  },
+  {
+    slug: "black-tracksuit",
+    name: "Black Tracksuit",
+    color: "Black",
     category: "tracksuit",
     categoryLabel: "Tracksuits",
     price: 2000,
     sizes: CLOTHING_SIZES,
     fabric: "Brushed polyester tracksuit fabric with a soft inner lining.",
     description:
-      "Full-zip tracksuit jacket and trousers in black, trimmed in gold with 'SAIKAPIAN' printed across the back.",
-    images: [{ src: `${CLOTHING_DIR}/TrackSuit.jpg`, label: "Front & Back" }],
+      "Full-zip tracksuit jacket and trousers in black, trimmed in gold-and-maroon racing stripes, with 'SAIKAPIAN' embroidered across the back and the school crest on the chest.",
+    images: [
+      { src: `${CLOTHING_DIR}/TrackSuit Black Front.png`, label: "Front" },
+      { src: `${CLOTHING_DIR}/Tracksuit Balck Back.png`, label: "Back" },
+      { src: `${CLOTHING_DIR}/Tracksuit Black Side1.png`, label: "Side" },
+      { src: `${CLOTHING_DIR}/Tracksuit Black Side2.png`, label: "Side 2" },
+    ],
+  },
+  {
+    slug: "maroon-tracksuit",
+    name: "Maroon Tracksuit",
+    color: "Maroon",
+    category: "tracksuit",
+    categoryLabel: "Tracksuits",
+    price: 2000,
+    sizes: CLOTHING_SIZES,
+    fabric: "Brushed polyester tracksuit fabric with a soft inner lining.",
+    description:
+      "Full-zip tracksuit jacket and trousers in maroon, trimmed in gold-and-orange racing stripes, with 'SAIKAPIAN' embroidered across the back and the school crest on the chest.",
+    images: [
+      { src: `${CLOTHING_DIR}/Tracksuit Maroon  Front.png`, label: "Front" },
+      { src: `${CLOTHING_DIR}/Tracksuit Maroon Back.png`, label: "Back" },
+      { src: `${CLOTHING_DIR}/Tracksuit Maroon Side1.png`, label: "Side" },
+      { src: `${CLOTHING_DIR}/Tracksuit Maroon Side2.png`, label: "Side 2" },
+    ],
+  },
+  {
+    slug: "offwhite-sweatshirt",
+    name: "Off-White Sweatshirt",
+    color: "Off-White",
+    category: "sweatshirt",
+    categoryLabel: "Sweatshirts",
+    price: 800,
+    sizes: CLOTHING_SIZES,
+    fabric: "Brushed fleece interior with a ribbed quarter-zip collar and cuffs.",
+    description:
+      "Quarter-zip fleece pullover in off-white with maroon trim, embroidered with the Sainik School Kapurthala crest.",
+    images: [
+      { src: `${CLOTHING_DIR}/Offwhite Sweatshirt front.png`, label: "Front" },
+      { src: `${CLOTHING_DIR}/offwhite Sweatshirt Back.png`, label: "Back" },
+      { src: `${CLOTHING_DIR}/Offwhite Sweatshirt Side.png`, label: "Side" },
+    ],
+  },
+  {
+    slug: "maroon-sweatshirt",
+    name: "Maroon Sweatshirt",
+    color: "Maroon",
+    category: "sweatshirt",
+    categoryLabel: "Sweatshirts",
+    price: 800,
+    sizes: CLOTHING_SIZES,
+    fabric: "Brushed fleece interior with a ribbed quarter-zip collar and cuffs.",
+    description:
+      "Quarter-zip fleece pullover in maroon with grey trim, embroidered with the Sainik School Kapurthala crest.",
+    images: [
+      { src: `${CLOTHING_DIR}/Sweatshirt Maroon Front.png`, label: "Front" },
+      { src: `${CLOTHING_DIR}/Sweatshirt Maroon Back.png`, label: "Back" },
+      { src: `${CLOTHING_DIR}/Swweatshirt Maroon Side.png`, label: "Side" },
+    ],
   },
   {
     slug: "black-cap",
